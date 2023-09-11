@@ -7,6 +7,19 @@ import { Component } from '@angular/core';
 })
 export class HomepageComponent {
 
+  hover: boolean = false;
   pippo: string = 'ZEBRA';
+
+  onMouseOver(): void {
+    this.hover = true;
+  }
+
+  onMouseLeave(): void {
+    this.hover = false;
+  }
+
+  onHandleHover(value: boolean): void {
+    console.log('*********', value);
+  }
 
 }
