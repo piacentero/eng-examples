@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
 
+export interface IForm {
+  emailAddress: string;
+  radio: string;
+  notes: string
+}
+
 @Component({
   selector: 'ecf-homepage',
   templateUrl: './homepage.component.html',
@@ -7,19 +13,10 @@ import { Component } from '@angular/core';
 })
 export class HomepageComponent {
 
-  hover: boolean = false;
-  pippo: string = 'ZEBRA';
+  list: IForm[] = [];
 
-  onMouseOver(): void {
-    this.hover = true;
-  }
-
-  onMouseLeave(): void {
-    this.hover = false;
-  }
-
-  onHandleHover(value: boolean): void {
-    console.log('*********', value);
+  onSubmit(item: IForm): void {
+    this.list.push(item);
   }
 
 }
