@@ -1,0 +1,28 @@
+<table class="table">
+
+  <thead>
+    <tr>
+      <th *ngFor="let column of columns" scope="col">
+        {{ column.label }}
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <ng-container *ngFor="let item of items; let index = index;">
+
+      <tr role="button" (click)="onRowExpand(index)">
+        <td *ngFor="let column of columns">
+          {{ item[column.propertyName] }}
+        </td>
+      </tr>
+      <tr *ngIf="isRowExpanded(index)">
+        <td [colSpan]="columns.length">
+          <ng-container *ngTemplateOutlet="rowDetailTpl; context: { item }"></ng-container>
+        </td>
+      </tr>
+
+    </ng-container>
+  </tbody>
+
+</table>
