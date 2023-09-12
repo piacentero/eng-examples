@@ -1,0 +1,38 @@
+<div class="row p-2">
+
+  <div class="col-6">
+    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" [(ngModel)]="emailAddress">
+  </div>
+
+  <div class="col-6">
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" [(ngModel)]="radio" value="First">
+      <label class="form-check-label" for="flexRadioDefault1">
+        First choice
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" [(ngModel)]="radio" value="Second">
+      <label class="form-check-label" for="flexRadioDefault2">
+        Second choice
+      </label>
+    </div>
+  </div>
+
+</div>
+
+<div class="row p-2">
+
+  <div class="col-12">
+    <label for="exampleFormControlTextarea1" class="form-label">Notes</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="notes"></textarea>
+  </div>
+
+</div>
+
+<div class="row p-2 justify-content-end">
+  <div class="col-1">
+    <button type="button" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+  </div>
+</div>
