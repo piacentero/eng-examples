@@ -15,11 +15,11 @@ export class FormComponent {
   @Output() submit: EventEmitter<IForm> = new EventEmitter();
 
   onSubmit(): void {
-    this.submit.emit(({
+    this.submit.emit({
       emailAddress: this.emailAddress,
       radio: this.radio,
       notes: this.notes
-    }));
+    });
   }
 
 }
