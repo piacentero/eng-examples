@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormService } from './services/form.service';
+import { FormComponent } from './components/form/form.component';
 
 export interface IForm {
   emailAddress: string;
@@ -14,6 +15,9 @@ export interface IForm {
 })
 export class HomepageComponent implements OnInit {
 
+  // @ViewChild(FormComponent) ecf: FormComponent;
+  @ViewChild('ecfForm') ecf: FormComponent;
+
   list: IForm[] = [];
 
   constructor(
@@ -21,6 +25,9 @@ export class HomepageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    setTimeout(() => {
+      console.log(this.ecf);
+    }, 3000);
   }
 
   // onSubmit(item: IForm): void {

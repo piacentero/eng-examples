@@ -32,7 +32,8 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   onDelete(index: number): void {
-    this.delete.emit(index);
+    this.list = this.list.filter((item, i) => i !== index);
+    // this.delete.emit(index);
   }
 
 }

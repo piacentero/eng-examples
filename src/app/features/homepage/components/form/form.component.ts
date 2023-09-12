@@ -19,6 +19,10 @@ export class FormComponent {
     private _formService: FormService
   ) {}
 
+  get isInvalid(): boolean {
+    return !this.notes || !this.emailAddress || !this.radio;
+  }
+
   onSubmit(): void {
     // this.submit.emit({
     //   emailAddress: this.emailAddress,
