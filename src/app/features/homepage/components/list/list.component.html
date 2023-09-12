@@ -1,7 +1,8 @@
 <ul>
 
-  <li *ngFor="let item of list">
+  <li *ngFor="let item of list; let index = index">
     Email address: {{ item.emailAddress }} - Choice: {{ item.radio }} - Notes: {{ item.notes }}
+    <i role="button" class="bi bi-trash3" (click)="onDelete(index)"></i>
   </li>
 
 </ul>

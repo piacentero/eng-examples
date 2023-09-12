@@ -20,6 +20,9 @@ export class FormComponent {
       radio: this.radio,
       notes: this.notes
     });
+    this.emailAddress = null;
+    this.radio = null;
+    this.notes = null;
   }
 
 }

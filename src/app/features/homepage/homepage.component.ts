@@ -19,4 +19,9 @@ export class HomepageComponent {
     this.list.push(item);
   }
 
+  onDelete(index: number): void {
+    // this.list.splice(index, 1);
+    this.list = this.list.filter((_, i) => i !== index);
+  }
+
 }

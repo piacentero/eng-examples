@@ -2,7 +2,7 @@
 
 <hr>
 
-<ecf-list [list]="list"></ecf-list>
+<ecf-list [list]="list" (delete)="onDelete($event)"></ecf-list>
 
 <!--
 1) Disabilitare pulsante submit se non tutti i campi del form non sono compilati;
