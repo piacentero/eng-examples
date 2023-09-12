@@ -4,12 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { PermissionButtonDirective } from './directives/permission-button.directive';
 import { CardComponent } from './components/card/card.component';
 import { CommonModule } from '@angular/common';
+import { TableComponent } from './components/table/table.component';
 
 @NgModule({
   declarations: [
     TestDirettivaDirective,
     PermissionButtonDirective,
-    CardComponent
+    CardComponent,
+    TableComponent
   ],
   imports: [
     CommonModule
@@ -18,7 +20,8 @@ import { CommonModule } from '@angular/common';
     TestDirettivaDirective,
     PermissionButtonDirective,
     CardComponent,
-    FormsModule
+    TableComponent,
+    FormsModule,
   ]
 })
 export class SharedModule {

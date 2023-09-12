@@ -16,6 +16,21 @@
   </ecf-card>
 </div>
 
+<div class="mt-5">
+
+  <ecf-table
+    [columns]="columns"
+    [items]="items"
+    [rowDetailTpl]="rowDetailTemplate">
+  </ecf-table>
+
+  <ng-template #rowDetailTemplate let-rowDetail="item">
+    Birth date: {{ rowDetail.birthDate | date }} <br>
+    Gender: {{ rowDetail.gender }}
+  </ng-template>
+
+</div>
+
 <!--<ng-template #bodyRefTemplate>-->
 <!--  <span>Some quick example text to build on the card title and make up the bulk of the card's content.</span>-->
 <!--</ng-template>-->
