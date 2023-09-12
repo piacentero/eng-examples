@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormService } from './services/form.service';
 
 export interface IForm {
   emailAddress: string;
@@ -11,13 +12,20 @@ export interface IForm {
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss']
 })
-export class HomepageComponent {
+export class HomepageComponent implements OnInit {
 
   list: IForm[] = [];
 
-  onSubmit(item: IForm): void {
-    this.list.push(item);
+  constructor(
+    private _formService: FormService
+  ) {}
+
+  ngOnInit(): void {
   }
+
+  // onSubmit(item: IForm): void {
+  //   this.list.push(item);
+  // }
 
   onDelete(index: number): void {
     // this.list.splice(index, 1);
