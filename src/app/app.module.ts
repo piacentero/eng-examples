@@ -9,7 +9,6 @@ import { CoreModule } from './core/core.module';
     AppComponent
   ],
   imports: [
-    BrowserModule,
     CoreModule,
     AppRoutingModule
   ],

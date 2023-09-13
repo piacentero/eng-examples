@@ -4,7 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: '', redirectTo: 'homepage', pathMatch: 'full' },
   { path: 'homepage', loadChildren: () => import('./features/homepage/homepage.module').then(m => m.HomepageModule) },
-  { path: 'private', loadChildren: () => import('./features/private/private.module').then(m => m.PrivateModule) }
+  { path: 'private', loadChildren: () => import('./features/private/private.module').then(m => m.PrivateModule) },
+  { path: 'movies', loadChildren: () => import('./features/movies/movies.module').then(m => m.MoviesModule) }
 ];
 
 @NgModule({

@@ -1,17 +1,12 @@
-<div class="row">
-  <div class="col-1">
-    <button class="btn btn-secondary" [routerLink]="'/private'">PRIVATE</button>
-  </div>
-</div>
-
 <div class="mt-5">
-  <ecf-form #ecfForm>
-  </ecf-form>
+  <ecf-form #ecfForm></ecf-form>
 </div>
 
 <hr>
 
-<ecf-list (delete)="onDelete($event)"></ecf-list>
+<div class="mt-5">
+  <ecf-list (delete)="onDelete($event)"></ecf-list>
+</div>
 
 <!--
 1) Disabilitare pulsante submit se non tutti i campi del form non sono compilati;
