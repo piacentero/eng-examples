@@ -3,7 +3,8 @@ import { Component, Input, TemplateRef } from '@angular/core';
 export interface ITableColumn<T = 'string'> {
   label: string;
   propertyName: string;
-  type: 'date' | 'string' | 'number' | 'boolean' | 'object';
+  type?: 'date' | 'string' | 'number' | 'boolean' | 'object';
+  templateRef?: TemplateRef<HTMLElement>;
 }
 
 @Component({

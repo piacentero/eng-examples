@@ -14,11 +14,17 @@
       <tr role="button" (click)="onRowExpand(index)">
         <td *ngFor="let column of columns">
 
-          <ng-container *ngIf="column.type === 'date'; else defaultView">
-            {{ item[column.propertyName] | date : 'dd/MM/yyyy' }}
+          <ng-container *ngIf="!!column.templateRef; else parsedValue">
+            <ng-container *ngTemplateOutlet="column.templateRef; context: { value: item[column.propertyName] }"></ng-container>
           </ng-container>
-          <ng-template #defaultView>
-            {{ item[column.propertyName] }}
+
+          <ng-template #parsedValue>
+            <ng-container *ngIf="column.type === 'date'; else defaultView">
+              {{ item[column.propertyName] | date : 'dd/MM/yyyy' }}
+            </ng-container>
+            <ng-template #defaultView>
+              {{ item[column.propertyName] }}
+            </ng-template>
           </ng-template>
 
         </td>

@@ -1,1 +1,8 @@
-{{ movies$ | async | json }}
+<ecf-table
+  [columns]="columns"
+  [items]="movies$ | async">
+</ecf-table>
+
+<ng-template #runningTimeTemplate let-value="value">
+  {{ value }} minutes
+</ng-template>

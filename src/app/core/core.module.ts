@@ -6,7 +6,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { ApiInterceptor } from './services/api.interceptor';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,13 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   exports: [
     MainComponent
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiInterceptor,
+      multi: true
+    }
   ]
 })
 export class CoreModule { }

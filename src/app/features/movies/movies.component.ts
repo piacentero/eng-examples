@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MovieService } from './services/movie.service';
 import { Observable } from 'rxjs';
 import { IMovie } from './models/interfaces/movie.interface';
+import { ITableColumn } from '../../shared/components/table/table.component';
 
 @Component({
   selector: 'ecf-movies',
@@ -10,7 +11,11 @@ import { IMovie } from './models/interfaces/movie.interface';
 })
 export class MoviesComponent implements OnInit {
 
+  @ViewChild('runningTimeTemplate', { static: true }) runningTimeTemplate: TemplateRef<HTMLElement>;
+
   movies$: Observable<IMovie[]>;
+
+  columns: ITableColumn[] = [];
 
   constructor(
     private _movieService: MovieService
@@ -18,6 +23,14 @@ export class MoviesComponent implements OnInit {
 
   ngOnInit(): void {
     this.movies$ = this._movieService.getMovies();
+
+    this.columns = [
+      { label: 'Name', propertyName: 'name' },
+      { label: 'Director', propertyName: 'director' },
+      { label: 'Genre', propertyName: 'genre' },
+      { label: 'Release date', propertyName: 'releaseDate', type: 'date' },
+      { label: 'Time', propertyName: 'runningTime', templateRef: this.runningTimeTemplate }
+    ]
   }
 
 }
