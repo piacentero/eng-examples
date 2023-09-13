@@ -5,13 +5,17 @@
       <th *ngFor="let column of columns" scope="col">
         {{ column.label }}
       </th>
+
+      <th *ngIf="!!actions?.length">
+        Actions
+      </th>
     </tr>
   </thead>
 
   <tbody>
     <ng-container *ngFor="let item of items; let index = index;">
 
-      <tr role="button" (click)="onRowExpand(index)">
+      <tr [attr.role]="!!expandable ? 'button' : ''" (click)="!!expandable && onRowExpand(index)">
         <td *ngFor="let column of columns">
 
           <ng-container *ngIf="!!column.templateRef; else parsedValue">
@@ -28,9 +32,15 @@
           </ng-template>
 
         </td>
+
+        <td *ngIf="!!actions?.length">
+          <ng-container *ngFor="let action of actions">
+            <i class="bi {{action.icon}}" role="button" (click)="action?.click(item)"></i>
+          </ng-container>
+        </td>
       </tr>
       <tr *ngIf="isRowExpanded(index)">
-        <td [colSpan]="columns.length">
+        <td [colSpan]="columns.length + actions?.length">
           <ng-container *ngTemplateOutlet="rowDetailTpl; context: { item }"></ng-container>
         </td>
       </tr>

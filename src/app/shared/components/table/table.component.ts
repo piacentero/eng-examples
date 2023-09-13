@@ -7,6 +7,11 @@ export interface ITableColumn<T = 'string'> {
   templateRef?: TemplateRef<HTMLElement>;
 }
 
+export interface ITableAction<T> {
+  icon: string;
+  click: (item: T) => void;
+}
+
 @Component({
   selector: 'ecf-table',
   templateUrl: './table.component.html',
@@ -14,7 +19,9 @@ export interface ITableColumn<T = 'string'> {
 })
 export class TableComponent<T> {
 
+  @Input() expandable: boolean = false;
   @Input() columns: ITableColumn<T>[];
+  @Input() actions: ITableAction<T>[];
   @Input() items: T[];
   @Input() rowDetailTpl: TemplateRef<HTMLElement>;
 
