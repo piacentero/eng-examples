@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { IForm } from '../../homepage.component';
 import { FormService } from '../../services/form.service';
-import { filter, Observable, Subscription, switchMap, tap, toArray } from 'rxjs';
+import { filter, map, Observable, Subscription, switchMap, tap, toArray } from 'rxjs';
 
 @Component({
   selector: 'ecf-list',
@@ -22,9 +22,19 @@ export class ListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    const previousObject = { a: 'uno', b: 'due' };
+    const nextObject = { ...previousObject, a: 'zeta' };
+    // const { a, ...rest } = previousObject;
+
+
     this.handler$ = this._formService.handler$.pipe(
       filter(item => !!item),
-      tap(item => this.list.push(item))
+      // map(item => ({
+      //   ...item,
+      //   emailAddress: item.emailAddress.replace('@', '#')
+      // })),
+      // tap(({ notes }) => console.log(notes)),
+      tap(item => this.list.push(item)),
     );
   }
 

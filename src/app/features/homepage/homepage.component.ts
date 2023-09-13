@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormService } from './services/form.service';
 import { FormComponent } from './components/form/form.component';
 
@@ -21,13 +21,12 @@ export class HomepageComponent implements OnInit {
   list: IForm[] = [];
 
   constructor(
-    private _formService: FormService
+    private _formService: FormService,
+    @Inject('KeyTest') private _keyTest: string
   ) {}
 
   ngOnInit(): void {
-    setTimeout(() => {
-      console.log(this.ecf);
-    }, 3000);
+    console.log(this._keyTest);
   }
 
   // onSubmit(item: IForm): void {

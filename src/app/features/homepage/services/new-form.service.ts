@@ -1,25 +1,19 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { IForm } from '../homepage.component';
 
 @Injectable()
-export class FormService {
+export class NewFormService {
 
   private _handler: BehaviorSubject<IForm> = new BehaviorSubject(null);
-  // private _handler: Subject<IForm> = new Subject<IForm>();
 
   constructor() {
-    console.log('form service');
+    console.log('new form service');
   }
 
   get handler$(): Observable<IForm> {
     return this._handler.asObservable();
   }
-
-  // getHandler$(): Observable<IForm> {
-  //   return this._handler.asObservable();
-  // }
-
   dispatch(item: IForm): void {
     this._handler.next(item);
   }
