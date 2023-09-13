@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+.error-modal {
+  .modal-content {
+    border: 1px red solid;
+
+    .modal-header {
+      border-bottom: 1px red solid;
+    }
+  }
+}

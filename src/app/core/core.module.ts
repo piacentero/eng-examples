@@ -8,11 +8,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ApiInterceptor } from './services/api.interceptor';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { ErrorModalComponent } from './modals/error-modal/error-modal.component';
 
 @NgModule({
   declarations: [
     MainComponent,
-    HeaderComponent
+    HeaderComponent,
+    ErrorModalComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +24,11 @@ import { ApiInterceptor } from './services/api.interceptor';
     CommonModule,
     RouterModule,
     HttpClientModule,
-    BsDropdownModule.forRoot()
+    NgxSpinnerModule.forRoot({
+      type: 'ball-clip-rotate'
+    }),
+    BsDropdownModule.forRoot(),
+    ModalModule.forRoot()
   ],
   exports: [
     MainComponent
