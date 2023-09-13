@@ -9,9 +9,9 @@ import { ITableColumn } from '../../shared/components/table/table.component';
 export class PrivateComponent {
 
   columns: ITableColumn[] = [
-    { label: 'Name', propertyName: 'name' },
-    { label: 'Surname', propertyName: 'surname' },
-    { label: 'Age', propertyName: 'age' }
+    { label: 'Name', propertyName: 'name', type: 'string' },
+    { label: 'Surname', propertyName: 'surname', type: 'string' },
+    { label: 'Age', propertyName: 'age', type: 'string' }
   ];
 
   items: { name: string, surname: string, age: number, birthDate: Date, gender: 'M' | 'F' }[] = [

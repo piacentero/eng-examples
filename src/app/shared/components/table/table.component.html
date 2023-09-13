@@ -13,7 +13,14 @@
 
       <tr role="button" (click)="onRowExpand(index)">
         <td *ngFor="let column of columns">
-          {{ item[column.propertyName] }}
+
+          <ng-container *ngIf="column.type === 'date'; else defaultView">
+            {{ item[column.propertyName] | date : 'dd/MM/yyyy' }}
+          </ng-container>
+          <ng-template #defaultView>
+            {{ item[column.propertyName] }}
+          </ng-template>
+
         </td>
       </tr>
       <tr *ngIf="isRowExpanded(index)">

@@ -1,8 +1,9 @@
 import { Component, Input, TemplateRef } from '@angular/core';
 
-export interface ITableColumn {
+export interface ITableColumn<T = 'string'> {
   label: string;
   propertyName: string;
+  type: 'date' | 'string' | 'number' | 'boolean' | 'object';
 }
 
 @Component({
@@ -12,7 +13,7 @@ export interface ITableColumn {
 })
 export class TableComponent<T> {
 
-  @Input() columns: ITableColumn[];
+  @Input() columns: ITableColumn<T>[];
   @Input() items: T[];
   @Input() rowDetailTpl: TemplateRef<HTMLElement>;
 
