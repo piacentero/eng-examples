@@ -52,21 +52,29 @@ export class MoviesComponent implements OnInit {
   }
 
   private _delete(id: string, name: string): void {
-    const modalRef = this._modalService.show(ConfirmModalComponent, {
+    const modalRef = this._modalService.show(ConfirmModalComponent<IMovie>, {
       backdrop: 'static',
       class: 'modal-md modal-dialog-centered',
       initialState: {
-        message: `Sei sicuro di voler cancellare il film ${name}?`
+        message: `Sei sicuro di voler cancellare il film ${name}?`,
+        confirmAction$: this._movieService.deleteMovie(id)
       }
     });
 
     modalRef.content.modalOutput.pipe(
-      filter(outcome => !!outcome),
-      switchMap(() => this._movieService.deleteMovie(id)),
       tap(() => modalRef.hide()),
+      filter(outcome => !!outcome),
       delay(500),
       tap(() => location.reload())
     ).subscribe();
+
+    // modalRef.content.modalOutput.pipe(
+    //   filter(outcome => !!outcome),
+    //   switchMap(() => this._movieService.deleteMovie(id)),
+    //   tap(() => modalRef.hide()),
+    //   delay(500),
+    //   tap(() => location.reload())
+    // ).subscribe();
   }
 
 }

@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { Subject } from 'rxjs';
+import { Observable, Subject, take, tap } from 'rxjs';
 
 @Component({
   selector: 'ecf-confirm-modal',
   templateUrl: './confirm-modal.component.html',
   styleUrls: ['./confirm-modal.component.scss']
 })
-export class ConfirmModalComponent {
+export class ConfirmModalComponent<T> {
 
   message?: string;
+  confirmAction$: Observable<T>;
 
   modalOutput: Subject<boolean> = new Subject();
 
@@ -18,8 +19,14 @@ export class ConfirmModalComponent {
   ) {}
 
   onCloseModal(outcome?: boolean): void {
-    this.modalOutput.next(outcome);
-    if(!outcome) this._modalService.hide();
+    if(!!outcome) {
+      this.confirmAction$.pipe(
+        take(1),
+        tap(() => this.modalOutput.next(outcome))
+      ).subscribe();
+    } else {
+      this.modalOutput.next(outcome)
+    }
   }
 
 }
