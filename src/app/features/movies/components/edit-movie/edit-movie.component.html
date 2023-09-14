@@ -1,5 +1,15 @@
 <ng-container *ngIf="movie$ | async">
 
+  <div class="my-5">
+    <alert
+      *ngIf="saved"
+      type="success"
+      [dismissible]="saved"
+      (onClosed)="saved = !saved">
+      <strong>Well done!</strong> You successfully saved the movie!
+    </alert>
+  </div>
+
   <form [formGroup]="form" class="mt-5" (ngSubmit)="onSubmit()">
 
     <div class="row g-3">
@@ -13,7 +23,7 @@
       <div class="col-12 col-lg-6">
         <label for="movieName" class="form-label">Name</label>
         <div class="input-group has-validation">
-          <input type="text" class="form-control" id="movieName" formControlName="name" [ngClass]="{ 'is-invalid': isInvalid('name') }">
+          <input type="text" class="form-control" id="movieName" formControlName="name" [ngClass]="{ 'is-invalid': isInvalid(form, 'name') }">
           <div class="invalid-feedback">
             Please choose a name.
           </div>
@@ -23,7 +33,7 @@
       <div class="col-12 col-lg-6">
         <label for="director" class="form-label">Director</label>
         <div class="input-group has-validation">
-          <input type="text" class="form-control" id="director" formControlName="director" [ngClass]="{ 'is-invalid': isInvalid('director') }">
+          <input type="text" class="form-control" id="director" formControlName="director" [ngClass]="{ 'is-invalid': isInvalid(form, 'director') }">
           <div class="invalid-feedback">
             Please choose a director.
           </div>
@@ -33,7 +43,7 @@
       <div class="col-12 col-lg-6">
         <label for="genre" class="form-label">Genre</label>
         <div class="input-group has-validation">
-          <input type="text" class="form-control" id="genre" formControlName="genre" [ngClass]="{ 'is-invalid': isInvalid('genre') }">
+          <input type="text" class="form-control" id="genre" formControlName="genre" [ngClass]="{ 'is-invalid': isInvalid(form, 'genre') }">
           <div class="invalid-feedback">
             Please choose a genre.
           </div>
@@ -43,7 +53,7 @@
       <div class="col-12 col-lg-6">
         <label for="releaseDate" class="form-label">Release Date</label>
         <div class="input-group has-validation">
-          <input bsDatepicker type="text" class="form-control" id="releaseDate" formControlName="releaseDate" [ngClass]="{ 'is-invalid': isInvalid('releaseDate') }">
+          <input bsDatepicker [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" type="text" class="form-control" id="releaseDate" formControlName="releaseDate" [ngClass]="{ 'is-invalid': isInvalid(form, 'releaseDate') }">
           <div class="invalid-feedback">
             Please choose a release date.
           </div>
@@ -53,18 +63,82 @@
       <div class="col-12 col-lg-6">
         <label for="runningTime" class="form-label">Running Time</label>
         <div class="input-group has-validation">
-          <input type="number" class="form-control" id="runningTime" formControlName="runningTime" [ngClass]="{ 'is-invalid': isInvalid('runningTime') }">
+          <input type="number" class="form-control" id="runningTime" formControlName="runningTime" [ngClass]="{ 'is-invalid': isInvalid(form, 'runningTime') }">
           <div class="invalid-feedback">
             Please insert a running time.
           </div>
         </div>
       </div>
+
+      <div class="col-12 text-end">
+        <button class="btn btn-outline-success" type="button" (click)="onAddActor()" [disabled]="actorsArrayInvalid">Add actor</button>
+      </div>
+
+<!--      <div class="col-12" *ngFor="let actorForm of actorsForm; let i = index">-->
+
+<!--        <div class="row" [formGroup]="actorForm">-->
+<!--          <div class="col-12 col-lg-5">-->
+<!--            <label for="actorName{{i}}" class="form-label">Name</label>-->
+<!--            <div class="input-group has-validation">-->
+<!--              <input type="text" class="form-control" id="actorName{{i}}" formControlName="name" [ngClass]="{ 'is-invalid': isInvalid(actorForm, 'name') }">-->
+<!--              <div class="invalid-feedback">-->
+<!--                Please choose a name.-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="col-12 col-lg-5">-->
+<!--            <label for="actorSurname{{i}}" class="form-label">Surname</label>-->
+<!--            <div class="input-group has-validation">-->
+<!--              <input type="text" class="form-control" id="actorSurname{{i}}" formControlName="surname" [ngClass]="{ 'is-invalid': isInvalid(actorForm, 'surname') }">-->
+<!--              <div class="invalid-feedback">-->
+<!--                Please choose a surname.-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="col-12 col-lg-2 d-flex align-items-end justify-content-end mt-3 mt-lg-0">-->
+<!--            <button class="btn btn-outline-danger" type="button" (click)="onRemoveActor(i)"><i class="bi bi-trash" role="button"></i>Remove</button>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--      </div>-->
+
+      <ng-container formArrayName="actors">
+        <div *ngFor="let actorForm of actorsArray.controls; index as i">
+          <div class="row" [formGroup]="actorForm">
+            <div class="col-12 col-lg-5">
+              <label for="actorName{{i}}" class="form-label">Name</label>
+              <div class="input-group has-validation">
+                <input type="text" class="form-control" id="actorName{{i}}" formControlName="name" [ngClass]="{ 'is-invalid': isInvalid(actorForm, 'name') }">
+                <div class="invalid-feedback">
+                  Please choose a name.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-5">
+              <label for="actorSurname{{i}}" class="form-label">Surname</label>
+              <div class="input-group has-validation">
+                <input type="text" class="form-control" id="actorSurname{{i}}" formControlName="surname" [ngClass]="{ 'is-invalid': isInvalid(actorForm, 'surname') }">
+                <div class="invalid-feedback">
+                  Please choose a surname.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-2 d-flex align-items-end justify-content-end mt-3 mt-lg-0">
+              <button class="btn btn-outline-danger" type="button" (click)="onRemoveActor(i)"><i class="bi bi-trash" role="button"></i>Remove</button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
     </div>
 
     <div class="row mt-5">
       <div class="col-12 text-end">
         <button class="btn btn-secondary" type="button" (click)="onReset()">Reset</button>
-        <button class="btn btn-primary ms-2" type="submit">Save</button>
+        <button class="btn btn-primary ms-2" type="submit" [disabled]="form.invalid || actorsArrayInvalid">Save</button>
       </div>
     </div>
 

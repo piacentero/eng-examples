@@ -3,6 +3,12 @@ export interface IMovie {
   name: string;
   director: string;
   genre: string;
-  releaseDate: Date;
+  releaseDate: number;
   runningTime: number;
+  actors: IActor[];
+}
+
+export interface IActor {
+  name: string;
+  surname: string;
 }
