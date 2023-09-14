@@ -28,4 +28,8 @@ export class MovieService {
     return this._httpClient.put<IMovie>(`https://641711077107365a7ca3bce3.mockapi.io/movies/${movie.id}`, movie);
   }
 
+  deleteMovie(id: string): Observable<IMovie> {
+    return this._httpClient.delete<IMovie>(`https://641711077107365a7ca3bce3.mockapi.io/movies/${id}`);
+  }
+
 }
