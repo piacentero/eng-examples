@@ -1,0 +1,73 @@
+<ng-container *ngIf="movie$ | async">
+
+  <form [formGroup]="form" class="mt-5" (ngSubmit)="onSubmit()">
+
+    <div class="row g-3">
+      <div class="col-12 col-lg-6">
+        <label for="movieId" class="form-label">Id</label>
+        <div class="input-group has-validation">
+          <input type="text" class="form-control" id="movieId" formControlName="id">
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-6">
+        <label for="movieName" class="form-label">Name</label>
+        <div class="input-group has-validation">
+          <input type="text" class="form-control" id="movieName" formControlName="name" [ngClass]="{ 'is-invalid': isInvalid('name') }">
+          <div class="invalid-feedback">
+            Please choose a name.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-6">
+        <label for="director" class="form-label">Director</label>
+        <div class="input-group has-validation">
+          <input type="text" class="form-control" id="director" formControlName="director" [ngClass]="{ 'is-invalid': isInvalid('director') }">
+          <div class="invalid-feedback">
+            Please choose a director.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-6">
+        <label for="genre" class="form-label">Genre</label>
+        <div class="input-group has-validation">
+          <input type="text" class="form-control" id="genre" formControlName="genre" [ngClass]="{ 'is-invalid': isInvalid('genre') }">
+          <div class="invalid-feedback">
+            Please choose a genre.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-6">
+        <label for="releaseDate" class="form-label">Release Date</label>
+        <div class="input-group has-validation">
+          <input type="text" class="form-control" id="releaseDate" formControlName="releaseDate" [ngClass]="{ 'is-invalid': isInvalid('releaseDate') }">
+          <div class="invalid-feedback">
+            Please choose a release date.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-6">
+        <label for="runningTime" class="form-label">Running Time</label>
+        <div class="input-group has-validation">
+          <input type="number" class="form-control" id="runningTime" formControlName="runningTime" [ngClass]="{ 'is-invalid': isInvalid('runningTime') }">
+          <div class="invalid-feedback">
+            Please insert a running time.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-12 text-end">
+        <button class="btn btn-secondary" type="button" (click)="onReset()">Reset</button>
+        <button class="btn btn-primary ms-2" type="submit">Save</button>
+      </div>
+    </div>
+
+  </form>
+
+</ng-container>
