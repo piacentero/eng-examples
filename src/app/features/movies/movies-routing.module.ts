@@ -4,6 +4,7 @@ import { MoviesComponent } from './movies.component';
 import { EditMovieComponent } from './components/edit-movie/edit-movie.component';
 import { ListChildComponent } from './components/list-child/list-child.component';
 import { ListChild2Component } from './components/list-child2/list-child2.component';
+import { movieResolver } from './resolvers/movie.resolver';
 
 const routes: Routes = [
   {
@@ -31,7 +32,10 @@ const routes: Routes = [
   },
   {
     path: 'create-edit/:id',
-    component: EditMovieComponent
+    component: EditMovieComponent,
+    // resolve: {
+    //   movie: movieResolver
+    // }
   }
 ];
 

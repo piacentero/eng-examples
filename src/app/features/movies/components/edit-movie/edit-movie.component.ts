@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IActor, IMovie } from '../../models/interfaces/movie.interface';
-import { debounceTime, distinctUntilChanged, Observable, skip, Subscription, switchMap, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, iif, Observable, of, skip, Subscription, switchMap, take, tap } from 'rxjs';
 import { Form, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 export interface IMovieForm {
@@ -65,15 +65,45 @@ export class EditMovieComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.movie$ = this._movieService.getMovie(this._activatedRoute.snapshot.paramMap.get('id')).pipe(
-      tap(movie => {
-        movie.actors.forEach(() => this.onAddActor())
-      }),
-      tap(movie => this.form.patchValue({
-        ...movie,
-        releaseDate: !!movie.releaseDate ? new Date(movie.releaseDate) : null
-      }))
-    );
+    // this.movie$ = this._activatedRoute.paramMap.pipe(
+    //   switchMap(paramMap => iif(
+    //     () => !!paramMap.get('id'),
+    //     this._movieService.getMovie(paramMap.get('id')).pipe(
+    //       take(1),
+    //       tap(movie => {
+    //         movie.actors.forEach(() => this.onAddActor())
+    //       }),
+    //       tap(movie => this.form.patchValue({
+    //         ...movie,
+    //         releaseDate: !!movie.releaseDate ? new Date(movie.releaseDate) : null
+    //       }))
+    //     ),
+    //     of(null)
+    //   ))
+    // );
+    // Soluzione alternativa
+    const id: string = this._activatedRoute.snapshot.paramMap.get('id');
+    // const movie: IMovie = this._activatedRoute.snapshot.data.movie;
+    //
+    // if(!!id) {
+    //   this.form.patchValue({
+    //     ...movie,
+    //     releaseDate: !!movie.releaseDate ? new Date(movie.releaseDate) : null
+    //   });
+    // }
+
+    if(!!id) {
+      this._movieService.getMovie(id).pipe(
+        take(1),
+        tap(movie => {
+          movie.actors.forEach(() => this.onAddActor())
+        }),
+        tap(movie => this.form.patchValue({
+          ...movie,
+          releaseDate: !!movie.releaseDate ? new Date(movie.releaseDate) : null
+        }))
+      ).subscribe();
+    }
 
     // this.movie$ = this._activatedRoute.paramMap.pipe(
     //   switchMap(paramMap => this._movieService.getMovie(paramMap.get('id')))
@@ -115,7 +145,11 @@ export class EditMovieComponent implements OnInit, OnDestroy {
     this.form.markAllAsTouched();
 
     const movie = this.form.getRawValue();
-    this._movieService.updateMovie({ ...movie, releaseDate: movie.releaseDate.getTime() } as IMovie).pipe(
+
+    const request = { ...movie, releaseDate: movie.releaseDate.getTime() } as IMovie;
+    const createUpdate$: Observable<IMovie> = !!movie.id ? this._movieService.updateMovie(request) : this._movieService.createMovie(request);
+
+    createUpdate$.pipe(
       tap(() => this.saved = true)
     ).subscribe();
   }

@@ -1,4 +1,4 @@
-<ng-container *ngIf="movie$ | async">
+<!--<ng-container *ngIf="{ movie: movie$ | async }">-->
 
   <div class="my-5">
     <alert
@@ -13,7 +13,7 @@
   <form [formGroup]="form" class="mt-5" (ngSubmit)="onSubmit()">
 
     <div class="row g-3">
-      <div class="col-12 col-lg-6">
+      <div class="col-12 col-lg-6" *ngIf="!!form.get('id').value">
         <label for="movieId" class="form-label">Id</label>
         <div class="input-group has-validation">
           <input type="text" class="form-control" id="movieId" formControlName="id">
@@ -144,4 +144,4 @@
 
   </form>
 
-</ng-container>
+<!--</ng-container>-->

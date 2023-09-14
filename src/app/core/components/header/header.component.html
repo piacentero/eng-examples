@@ -8,10 +8,10 @@
         <li class="nav-item">
           <a class="nav-link" aria-current="page" routerLink="/homepage" routerLinkActive="active">Home</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isAdmin()">
           <a class="nav-link" routerLink="/private" routerLinkActive="active">Private</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="isUser()">
           <a class="nav-link" routerLink="/movies" routerLinkActive="active">Movies</a>
         </li>
       </ul>
