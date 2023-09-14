@@ -1,9 +1,13 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MovieService } from './services/movie.service';
-import { Observable } from 'rxjs';
+import { delay, filter, Observable, switchMap, tap } from 'rxjs';
 import { IMovie } from './models/interfaces/movie.interface';
 import { ITableAction, ITableColumn } from '../../shared/components/table/table.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ErrorModalComponent } from '../../core/modals/error-modal/error-modal.component';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { ConfirmModalComponent } from '../../shared/modals/confirm-modal/confirm-modal.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'ecf-movies',
@@ -22,14 +26,16 @@ export class MoviesComponent implements OnInit {
   constructor(
     private _movieService: MovieService,
     private _activatedRoute: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    private _modalService: BsModalService
   ) {}
 
   ngOnInit(): void {
     this.movies$ = this._movieService.getMovies();
 
     this.actions = [
-      { icon: 'bi-pencil', click: ({ id }: IMovie) => this._edit(id) }
+      { icon: 'bi-pencil', click: ({ id }: IMovie) => this._edit(id) },
+      { icon: 'bi-trash', click: ({ id, name }: IMovie) => this._delete(id, name) }
     ];
     this.columns = [
       { label: 'Name', propertyName: 'name' },
@@ -43,6 +49,24 @@ export class MoviesComponent implements OnInit {
   private _edit(id: string): void {
     this._router.navigate(['movies', 'create-edit', id]);
     // this._router.navigate(['edit', id], { relativeTo: this._activatedRoute });
+  }
+
+  private _delete(id: string, name: string): void {
+    const modalRef = this._modalService.show(ConfirmModalComponent, {
+      backdrop: 'static',
+      class: 'modal-md modal-dialog-centered',
+      initialState: {
+        message: `Sei sicuro di voler cancellare il film ${name}?`
+      }
+    });
+
+    modalRef.content.modalOutput.pipe(
+      filter(outcome => !!outcome),
+      switchMap(() => this._movieService.deleteMovie(id)),
+      tap(() => modalRef.hide()),
+      delay(500),
+      tap(() => location.reload())
+    ).subscribe();
   }
 
 }

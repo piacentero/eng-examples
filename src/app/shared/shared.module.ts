@@ -8,6 +8,7 @@ import { TableComponent } from './components/table/table.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ConfirmModalComponent } from './modals/confirm-modal/confirm-modal.component';
 
 const bootstrapModules = [
   AlertModule,
@@ -20,7 +21,8 @@ const bootstrapModules = [
     TestDirettivaDirective,
     PermissionButtonDirective,
     CardComponent,
-    TableComponent
+    TableComponent,
+    ConfirmModalComponent
   ],
   imports: [
     CommonModule
