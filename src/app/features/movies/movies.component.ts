@@ -41,8 +41,8 @@ export class MoviesComponent implements OnInit {
   }
 
   private _edit(id: string): void {
-    // this._router.navigate(['movies', 'edit', id]);
-    this._router.navigate(['edit', id], { relativeTo: this._activatedRoute });
+    this._router.navigate(['movies', 'create-edit', id]);
+    // this._router.navigate(['edit', id], { relativeTo: this._activatedRoute });
   }
 
 }

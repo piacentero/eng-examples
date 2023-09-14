@@ -1,3 +1,9 @@
+<div class="row my-5">
+  <div class="col-12 text-end">
+    <button class="btn btn-outline-info" routerLink="/movies/create-edit">Create</button>
+  </div>
+</div>
+
 <ecf-table
   [actions]="actions"
   [columns]="columns"
@@ -7,3 +13,14 @@
 <ng-template #runningTimeTemplate let-value="value">
   {{ value }} minutes
 </ng-template>
+
+<div class="d-flex gap-2">
+  <a routerLink="/movies">PARENT</a>
+  <a routerLink="child1">CHILD1</a>
+  <a routerLink="child2">CHILD2</a>
+</div>
+
+<div class="mt-5">
+  <router-outlet></router-outlet>
+</div>
+

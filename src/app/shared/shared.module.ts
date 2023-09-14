@@ -7,10 +7,12 @@ import { CommonModule } from '@angular/common';
 import { TableComponent } from './components/table/table.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 const bootstrapModules = [
   AlertModule,
-  BsDatepickerModule
+  BsDatepickerModule,
+  TabsModule
 ];
 
 @NgModule({

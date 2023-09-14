@@ -2,14 +2,35 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MoviesComponent } from './movies.component';
 import { EditMovieComponent } from './components/edit-movie/edit-movie.component';
+import { ListChildComponent } from './components/list-child/list-child.component';
+import { ListChild2Component } from './components/list-child2/list-child2.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: MoviesComponent
+    redirectTo: 'list',
+    pathMatch: 'full'
   },
   {
-    path: 'edit/:id',
+    path: 'list',
+    component: MoviesComponent,
+    children: [
+      {
+        path: 'child1',
+        component: ListChildComponent
+      },
+      {
+        path: 'child2',
+        component: ListChild2Component
+      },
+    ]
+  },
+  {
+    path: 'create-edit',
+    component: EditMovieComponent
+  },
+  {
+    path: 'create-edit/:id',
     component: EditMovieComponent
   }
 ];

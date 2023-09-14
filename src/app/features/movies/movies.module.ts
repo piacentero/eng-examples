@@ -4,12 +4,16 @@ import { MoviesRoutingModule } from './movies-routing.module';
 import { MoviesComponent } from './movies.component';
 import { SharedModule } from '../../shared/shared.module';
 import { EditMovieComponent } from './components/edit-movie/edit-movie.component';
+import { ListChildComponent } from './components/list-child/list-child.component';
+import { ListChild2Component } from './components/list-child2/list-child2.component';
 
 
 @NgModule({
   declarations: [
     MoviesComponent,
-    EditMovieComponent
+    EditMovieComponent,
+    ListChildComponent,
+    ListChild2Component
   ],
   imports: [
     CommonModule,

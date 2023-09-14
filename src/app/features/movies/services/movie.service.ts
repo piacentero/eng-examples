@@ -20,6 +20,10 @@ export class MovieService {
     return this._httpClient.get<IMovie>(`https://641711077107365a7ca3bce3.mockapi.io/movies/${id}`);
   }
 
+  createMovie(movie: Partial<IMovie>): Observable<IMovie> {
+    return this._httpClient.post<IMovie>(`https://641711077107365a7ca3bce3.mockapi.io/movies`, movie);
+  }
+
   updateMovie(movie: IMovie): Observable<IMovie> {
     return this._httpClient.put<IMovie>(`https://641711077107365a7ca3bce3.mockapi.io/movies/${movie.id}`, movie);
   }
