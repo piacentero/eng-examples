@@ -5,6 +5,11 @@ import { PermissionButtonDirective } from './directives/permission-button.direct
 import { CardComponent } from './components/card/card.component';
 import { CommonModule } from '@angular/common';
 import { TableComponent } from './components/table/table.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
+const bootstrapModules = [
+  BsDatepickerModule
+];
 
 @NgModule({
   declarations: [
@@ -17,12 +22,13 @@ import { TableComponent } from './components/table/table.component';
     CommonModule
   ],
   exports: [
-    TestDirettivaDirective,
-    PermissionButtonDirective,
+    FormsModule,
+    ReactiveFormsModule,
+    ...bootstrapModules,
     CardComponent,
     TableComponent,
-    FormsModule,
-    ReactiveFormsModule
+    TestDirettivaDirective,
+    PermissionButtonDirective
   ]
 })
 export class SharedModule {

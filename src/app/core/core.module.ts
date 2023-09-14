@@ -11,6 +11,7 @@ import { ApiInterceptor } from './services/api.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ErrorModalComponent } from './modals/error-modal/error-modal.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ErrorModalComponent } from './modals/error-modal/error-modal.component'
     NgxSpinnerModule.forRoot({
       type: 'ball-clip-rotate'
     }),
+    BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
     ModalModule.forRoot()
   ],
