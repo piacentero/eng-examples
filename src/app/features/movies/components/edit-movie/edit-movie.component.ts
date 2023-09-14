@@ -33,7 +33,10 @@ export class EditMovieComponent implements OnInit {
 
   ngOnInit(): void {
     this.movie$ = this._movieService.getMovie(this._activatedRoute.snapshot.paramMap.get('id')).pipe(
-      tap(movie => this.form.patchValue(movie))
+      tap(movie => this.form.patchValue({
+        ...movie,
+        releaseDate: !!movie.releaseDate ? new Date(movie.releaseDate) : null
+      }))
     );
     // this.movie$ = this._activatedRoute.paramMap.pipe(
     //   switchMap(paramMap => this._movieService.getMovie(paramMap.get('id')))
